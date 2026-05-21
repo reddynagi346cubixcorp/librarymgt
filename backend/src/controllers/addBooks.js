@@ -1,7 +1,5 @@
 const { db } = require("../../firebase");
-
 const { v4: uuidv4 } = require("uuid");
-
 const { bookSchema } = require("../schemas/books");
 
 const addBooks = async (req, res) => {
@@ -11,6 +9,7 @@ const addBooks = async (req, res) => {
     const newBook = {
       id: bookId,
       ...validatedData,
+      deleted: false,
       createdAt: new Date(),
     };
     const docRef = await db.collection("books").doc(bookId).set(newBook);

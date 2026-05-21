@@ -3,7 +3,7 @@ const { db } = require("../../firebase");
 const getBooks = async (req, res) => {
   try {
     const { author, genre, year } = req.query;
-    let query = db.collection("books");
+    let query = db.collection("books").where("deleted", "!=", true);
     if (author) {
       query = query.where("author", "==", author);
     }
